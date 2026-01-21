@@ -1,0 +1,4 @@
+package com.example.treasurehuntapp.features.create_location
+
+class CreateLocationViewModel {
+}
