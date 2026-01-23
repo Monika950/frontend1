@@ -15,100 +15,64 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit,
-    onRegisterClick: () -> Unit,
+    onLoggedIn: () -> Unit,
     vm: LoginViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsState()
 
-    Scaffold(
-        topBar = {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text("Login", style = MaterialTheme.typography.headlineMedium)
 
-            TopAppBar(title = { Text("Login") })
-        }
-    ) { padding ->
-        Column(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
+        Spacer(Modifier.height(16.dp))
 
+        OutlinedTextField(
+            value = state.email,
+            onValueChange = vm::onEmailChange,
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text("Email") },
+            singleLine = true
+        )
+
+        Spacer(Modifier.height(10.dp))
+
+        OutlinedTextField(
+            value = state.password,
+            onValueChange = vm::onPasswordChange,
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text("Password") },
+            visualTransformation = PasswordVisualTransformation(),
+            singleLine = true
+        )
+
+        Spacer(Modifier.height(12.dp))
+
+        if (state.error != null) {
             Text(
-                text = "Treasure Hunt",
-                style = MaterialTheme.typography.headlineMedium
+                text = state.error!!,
+                color = MaterialTheme.colorScheme.error
             )
-
-            Spacer(Modifier.height(20.dp))
-
-            OutlinedTextField(
-                value = state.email,
-                onValueChange = vm::onEmailChange,
-                label = { Text("Email") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
-            )
-
             Spacer(Modifier.height(10.dp))
+        }
 
-            OutlinedTextField(
-                value = state.password,
-                onValueChange = vm::onPasswordChange,
-                label = { Text("Password") },
-                singleLine = true,
-                visualTransformation = if (state.isPasswordVisible)
-                    VisualTransformation.None
-                else
-                    PasswordVisualTransformation(),
-                trailingIcon = {
-                    IconButton(onClick = vm::togglePasswordVisibility) {
-                        Icon(
-                            imageVector = if (state.isPasswordVisible)
-                                Icons.Default.VisibilityOff
-                            else
-                                Icons.Default.Visibility,
-                            contentDescription = null
-                        )
-                    }
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            state.errorMessage?.let { msg ->
-                Spacer(Modifier.height(10.dp))
-                Text(
-                    text = msg,
-                    color = MaterialTheme.colorScheme.error
+        Button(
+            onClick = { vm.login(onSuccess = onLoggedIn) },
+            enabled = !state.isLoading,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            if (state.isLoading) {
+                CircularProgressIndicator(
+                    strokeWidth = 2.dp,
+                    modifier = Modifier.size(18.dp)
                 )
-            }
-
-            Spacer(Modifier.height(16.dp))
-
-            Button(
-                onClick = { vm.login(onLoginSuccess) },
-                enabled = state.isLoginEnabled,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                if (state.isLoading) {
-                    CircularProgressIndicator(
-                        strokeWidth = 2.dp,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(Modifier.width(10.dp))
-                    Text("Logging in...")
-                } else {
-                    Text("Login")
-                }
-            }
-
-            Spacer(Modifier.height(12.dp))
-
-            TextButton(
-                onClick = onRegisterClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("No account? Register")
+                Spacer(Modifier.width(8.dp))
+                Text("Signing in...")
+            } else {
+                Text("Login")
             }
         }
     }

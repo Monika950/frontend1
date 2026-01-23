@@ -4,7 +4,7 @@ data class LoginState(
     val password: String = "",
     val isPasswordVisible: Boolean = false,
     val isLoading: Boolean = false,
-    val errorMessage: String? = null
+    val error: String? = null
 ) {
     val isLoginEnabled: Boolean
         get() = email.isNotBlank() && password.length >= 6 && !isLoading

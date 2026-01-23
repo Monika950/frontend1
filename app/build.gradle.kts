@@ -63,5 +63,13 @@ dependencies {
 
     implementation(libs.material.icons.extended)
 
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlinx)
+    implementation(libs.retrofit.gson)
+
+    implementation(libs.androidx.datastore.preferences)
+
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging)
 
 }
