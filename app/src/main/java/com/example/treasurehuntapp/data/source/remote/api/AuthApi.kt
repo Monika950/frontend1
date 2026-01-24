@@ -1,4 +1,4 @@
-package com.example.treasurehuntapp.data.remote.api
+package com.example.treasurehuntapp.data.source.remote.api
 
 import com.example.treasurehuntapp.data.source.remote.dto.auth.*
 import com.example.treasurehuntapp.data.source.remote.dto.auth.AuthResponseDto
