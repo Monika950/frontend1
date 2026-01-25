@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.compose.preview)
     implementation(libs.material3)
     implementation(libs.appcompat)
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences.core)
     debugImplementation(libs.compose.tooling)
 
     implementation(libs.navigation.compose)

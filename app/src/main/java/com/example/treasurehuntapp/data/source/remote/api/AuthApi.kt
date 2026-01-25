@@ -8,21 +8,22 @@ import com.example.treasurehuntapp.data.source.remote.dto.auth.LoginDto
 import com.example.treasurehuntapp.data.source.remote.dto.auth.RefreshTokenDto
 import com.example.treasurehuntapp.data.source.remote.dto.auth.RegisterDto
 import com.example.treasurehuntapp.data.source.remote.dto.auth.ResetPasswordDto
+import com.example.treasurehuntapp.data.source.remote.dto.common.ApiResponse
 import retrofit2.http.*
 
 interface AuthApi {
 
     @POST("auth/register")
-    suspend fun register(@Body body: RegisterDto): AuthResponseDto
+    suspend fun register(@Body body: RegisterDto): ApiResponse<AuthResponseDto>
 
     @POST("auth/login")
-    suspend fun login(@Body body: LoginDto): AuthResponseDto
+    suspend fun login(@Body body: LoginDto): ApiResponse<AuthResponseDto>
 
     @GET("auth/me")
-    suspend fun me(): MeDto
+    suspend fun me(): ApiResponse<MeDto>
 
     @POST("auth/refresh")
-    suspend fun refresh(@Body body: RefreshTokenDto): AuthResponseDto
+    suspend fun refresh(@Body body: RefreshTokenDto): ApiResponse<AuthResponseDto>
 
     @PATCH("auth/change-password")
     suspend fun changePassword(@Body body: ChangePasswordDto)
