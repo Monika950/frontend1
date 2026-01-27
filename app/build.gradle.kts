@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.datastore.preferences.core)
+    implementation(libs.compose.foundation)
     debugImplementation(libs.compose.tooling)
 
     implementation(libs.navigation.compose)
@@ -64,6 +65,7 @@ dependencies {
     testImplementation(libs.junit)
 
     implementation(libs.material.icons.extended)
+    implementation(libs.coil.compose)
 
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlinx)

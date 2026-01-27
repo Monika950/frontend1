@@ -10,8 +10,22 @@ import javax.inject.Singleton
 class AuthInterceptor @Inject constructor(
     private val tokenStorage: TokenStorage
 ) : Interceptor {
+    private fun isAuthEndpoint(path: String): Boolean {
+        return path.startsWith("/auth/login") ||
+                path.startsWith("/auth/register") ||
+                path.startsWith("/auth/refresh") ||
+                path.startsWith("/auth/forgot-password") ||
+                path.startsWith("/auth/reset-password")
+    }
+
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val path = request.url.encodedPath
+        if (path.startsWith("/auth/")) {
+            return chain.proceed(request)
+        }
+
         val token = tokenStorage.accessTokenNow()
         val requestBuilder = chain.request().newBuilder()
         if (!token.isNullOrBlank()) {
