@@ -69,10 +69,10 @@ class ProfileViewModel @Inject constructor(
                 state = state.copy(
                     saving = false,
                     user = updated,
-                    email = updated.email,
-                    username = updated.username,
-                    firstName = updated.firstName,
-                    lastName = updated.lastName,
+                    email = updated.email ?: state.email,
+                    username = updated.username ?: state.username,
+                    firstName = updated.firstName ?: state.firstName,
+                    lastName = updated.lastName ?: state.lastName,
                     currentlyEditing = null
                 )
             } catch (e: Exception) {

@@ -13,8 +13,7 @@ import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-//import androidx.compose.ui.text.input.KeyboardOptions
-//import androidx.compose.ui.text.input.KeyboardType
+
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -127,7 +126,6 @@ private fun ProfileContent(
     var showDeleteDialog by remember { mutableStateOf(false) }
     val initials = ((state.firstName.firstOrNull()?.uppercaseChar()?.toString() ?: "") +
             (state.lastName.firstOrNull()?.uppercaseChar()?.toString() ?: ""))
-            
         .ifBlank { state.username.firstOrNull()?.uppercaseChar()?.toString() ?: "U" }
 
     val isDirty =

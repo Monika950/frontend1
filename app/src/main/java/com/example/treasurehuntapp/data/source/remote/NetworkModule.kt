@@ -1,5 +1,6 @@
 package com.example.treasurehuntapp.di
 
+import com.example.treasurehuntapp.BuildConfig
 import com.example.treasurehuntapp.data.source.remote.api.AuthApi
 import com.example.treasurehuntapp.data.remote.auth.AuthInterceptor
 import com.example.treasurehuntapp.data.remote.auth.TokenAuthenticator
@@ -32,7 +33,12 @@ object NetworkModule {
     @Named("noAuthOkHttp")
     fun provideNoAuthOkHttp(): OkHttpClient {
         val logger = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+            redactHeader("Authorization")
         }
         return OkHttpClient.Builder()
             .addInterceptor(logger)
@@ -72,18 +78,17 @@ object NetworkModule {
         tokenAuthenticator: TokenAuthenticator
     ): OkHttpClient {
         val logger = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+            redactHeader("Authorization")
         }
 
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .authenticator(tokenAuthenticator)
-            .addInterceptor { chain ->
-                val req = chain.request()
-                val auth = req.header("Authorization")
-                chain.proceed(req)
-            }
-
             .addInterceptor(logger)
             .build()
     }
