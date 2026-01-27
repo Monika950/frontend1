@@ -15,7 +15,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onLoggedIn: () -> Unit,
+    onLoginSuccess: () -> Unit,
+    onRegisterClick: () -> Unit,
     vm: LoginViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsState()
@@ -60,7 +61,7 @@ fun LoginScreen(
         }
 
         Button(
-            onClick = { vm.login(onSuccess = onLoggedIn) },
+            onClick = { vm.login(onSuccess = onLoginSuccess) },
             enabled = !state.isLoading,
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -74,6 +75,15 @@ fun LoginScreen(
             } else {
                 Text("Login")
             }
+        }
+
+        Spacer(Modifier.height(12.dp))
+
+        TextButton(
+            onClick = {onRegisterClick()},
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("No account? Register")
         }
     }
 }
