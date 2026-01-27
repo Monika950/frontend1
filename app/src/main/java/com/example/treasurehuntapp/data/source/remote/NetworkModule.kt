@@ -1,19 +1,25 @@
 package com.example.treasurehuntapp.di
 
-import android.content.Context
-import com.example.treasurehuntapp.data.remote.api.AuthApi
+import com.example.treasurehuntapp.data.source.remote.api.AuthApi
 import com.example.treasurehuntapp.data.remote.auth.AuthInterceptor
-import com.example.treasurehuntapp.data.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.remote.auth.TokenAuthenticator
+import com.example.treasurehuntapp.data.source.remote.api.TreasureHuntApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
+import android.content.Context
+import com.example.treasurehuntapp.data.source.remote.api.LocationsApi
+import com.example.treasurehuntapp.data.source.remote.api.UsersApi
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
+import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -23,21 +29,62 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTokenStorage(@ApplicationContext context: Context): TokenStorage =
-        TokenStorage(context)
+    @Named("noAuthOkHttp")
+    fun provideNoAuthOkHttp(): OkHttpClient {
+        val logger = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        return OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .build()
+    }
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(
-        authInterceptor: AuthInterceptor
+    @Named("noAuthRetrofit")
+    fun provideNoAuthRetrofit(
+        @Named("noAuthOkHttp") client: OkHttpClient
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    @Provides
+    @Singleton
+    @Named("authApiNoAuth")
+    fun provideAuthApiNoAuth(
+        @Named("noAuthRetrofit") retrofit: Retrofit
+    ): AuthApi = retrofit.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTokenStorage(
+        @ApplicationContext context: Context,
+        @ApplicationScope appScope: CoroutineScope
+    ): TokenStorage = TokenStorage(context, appScope)
+
+    @Provides
+    @Singleton
+    fun provideOkHttp(
+        authInterceptor: AuthInterceptor,
+        tokenAuthenticator: TokenAuthenticator
     ): OkHttpClient {
-        val logging = HttpLoggingInterceptor().apply {
+        val logger = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
-            .addInterceptor(logging)
+            .authenticator(tokenAuthenticator)
+            .addInterceptor { chain ->
+                val req = chain.request()
+                val auth = req.header("Authorization")
+                chain.proceed(req)
+            }
+
+            .addInterceptor(logger)
             .build()
     }
 
@@ -54,4 +101,23 @@ object NetworkModule {
     @Singleton
     fun provideAuthApi(retrofit: Retrofit): AuthApi =
         retrofit.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTreasureHuntApi(retrofit: Retrofit): TreasureHuntApi =
+        retrofit.create(TreasureHuntApi::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideUsersApi(retrofit: Retrofit): UsersApi =
+        retrofit.create(UsersApi::class.java)
+
+    @Provides
+    fun provideLocationApi(retrofit: Retrofit): LocationsApi =
+        retrofit.create(LocationsApi::class.java)
+
 }
+
+
+
