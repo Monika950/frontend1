@@ -4,6 +4,8 @@ import com.example.treasurehuntapp.BuildConfig
 import com.example.treasurehuntapp.data.source.remote.api.AuthApi
 import com.example.treasurehuntapp.data.remote.auth.AuthInterceptor
 import com.example.treasurehuntapp.data.remote.auth.TokenAuthenticator
+import com.example.treasurehuntapp.data.remote.auth.UnauthorizedInterceptor
+import com.example.treasurehuntapp.data.source.remote.api.NotificationsApi
 import com.example.treasurehuntapp.data.source.remote.api.TreasureHuntApi
 import dagger.Module
 import dagger.Provides
@@ -13,11 +15,15 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 import android.content.Context
 import com.example.treasurehuntapp.data.source.remote.api.LocationsApi
 import com.example.treasurehuntapp.data.source.remote.api.UsersApi
+import com.example.treasurehuntapp.data.source.remote.api.UserAnswerApi
+import com.example.treasurehuntapp.data.source.remote.api.UserProgressApi
+import com.example.treasurehuntapp.data.source.remote.api.UploadsApi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
@@ -25,8 +31,6 @@ import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
-    private const val BASE_URL = "http://145.223.98.213:3000/"
 
     @Provides
     @Singleton
@@ -41,6 +45,9 @@ object NetworkModule {
             redactHeader("Authorization")
         }
         return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(logger)
             .build()
     }
@@ -52,7 +59,7 @@ object NetworkModule {
         @Named("noAuthOkHttp") client: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -75,7 +82,8 @@ object NetworkModule {
     @Singleton
     fun provideOkHttp(
         authInterceptor: AuthInterceptor,
-        tokenAuthenticator: TokenAuthenticator
+        tokenAuthenticator: TokenAuthenticator,
+        unauthorizedInterceptor: UnauthorizedInterceptor
     ): OkHttpClient {
         val logger = HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
@@ -87,7 +95,11 @@ object NetworkModule {
         }
 
         return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(authInterceptor)
+            .addInterceptor(unauthorizedInterceptor)
             .authenticator(tokenAuthenticator)
             .addInterceptor(logger)
             .build()
@@ -97,7 +109,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -112,6 +124,10 @@ object NetworkModule {
     fun provideTreasureHuntApi(retrofit: Retrofit): TreasureHuntApi =
         retrofit.create(TreasureHuntApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideNotificationsApi(retrofit: Retrofit): NotificationsApi =
+        retrofit.create(NotificationsApi::class.java)
 
     @Provides
     @Singleton
@@ -121,6 +137,18 @@ object NetworkModule {
     @Provides
     fun provideLocationApi(retrofit: Retrofit): LocationsApi =
         retrofit.create(LocationsApi::class.java)
+
+    @Provides
+    fun provideUserAnswerApi(retrofit: Retrofit): UserAnswerApi =
+        retrofit.create(UserAnswerApi::class.java)
+
+    @Provides
+    fun provideUserProgressApi(retrofit: Retrofit): UserProgressApi =
+        retrofit.create(UserProgressApi::class.java)
+
+    @Provides
+    fun provideUploadsApi(retrofit: Retrofit): UploadsApi =
+        retrofit.create(UploadsApi::class.java)
 
 }
 
