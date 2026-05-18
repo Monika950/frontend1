@@ -15,7 +15,7 @@ interface TreasureHuntApi {
     suspend fun create(@Body body: CreateTreasureHuntDto): ApiResponse<TreasureHuntDto>
 
     @GET("treasure-hunt")
-    suspend fun getAll(): ApiResponse<List<TreasureHuntDto>>
+    suspend fun getAll(): ApiResponse<List<HuntMembershipDto>>
 
     @GET("treasure-hunt/{id}")
     suspend fun getById(@Path("id") id: String): ApiResponse<TreasureHuntDto>
@@ -49,4 +49,10 @@ interface TreasureHuntApi {
         @Path("userId") userId: String,
         @Body body: UpdateParticipantRoleDto
     ): ApiResponse<ParticipantDto>
+
+    @DELETE("treasure-hunt/{id}/participants/{userId}")
+    suspend fun removeParticipant(
+        @Path("id") huntId: String,
+        @Path("userId") userId: String
+    ): ApiResponse<Unit>
 }

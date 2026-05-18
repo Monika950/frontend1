@@ -9,6 +9,7 @@ import com.example.treasurehuntapp.data.source.remote.dto.auth.RefreshTokenDto
 import com.example.treasurehuntapp.data.source.remote.dto.auth.RegisterDto
 import com.example.treasurehuntapp.data.source.remote.dto.auth.ResetPasswordDto
 import com.example.treasurehuntapp.data.source.remote.dto.common.ApiResponse
+import retrofit2.Response
 import retrofit2.http.*
 
 interface AuthApi {
@@ -29,7 +30,7 @@ interface AuthApi {
     suspend fun changePassword(@Body body: ChangePasswordDto)
 
     @POST("auth/forgot-password")
-    suspend fun forgotPassword(@Body body: ForgotPasswordDto)
+    suspend fun forgotPassword(@Body body: ForgotPasswordDto): Response<Unit>
 
     @POST("auth/reset-password")
     suspend fun resetPassword(@Body body: ResetPasswordDto)
