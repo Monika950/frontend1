@@ -22,6 +22,25 @@ android {
         compose = true
     }
 
+    flavorDimensions += "environment"
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            buildConfigField("String", "BASE_URL", "\"http://178.104.200.100:3000/\"")
+            buildConfigField("String", "SOCKET_BASE_URL", "\"http://178.104.200.100:3000\"")
+        }
+        create("qa") {
+            dimension = "environment"
+            buildConfigField("String", "BASE_URL", "\"http://178.104.200.100:3000/\"")
+            buildConfigField("String", "SOCKET_BASE_URL", "\"http://178.104.200.100:3000\"")
+        }
+        create("prod") {
+            dimension = "environment"
+            buildConfigField("String", "BASE_URL", "\"https://178.104.200.100:3000/\"")
+            buildConfigField("String", "SOCKET_BASE_URL", "\"https://178.104.200.100:3000\"")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -45,6 +64,16 @@ android {
 }
 
 dependencies {
+    // Keep core versions compatible with compileSdk 35 / AGP 8.6.1
+    constraints {
+        implementation("androidx.core:core-ktx:1.16.0") {
+            version { strictly("1.16.0") }
+        }
+        implementation("androidx.core:core:1.16.0") {
+            version { strictly("1.16.0") }
+        }
+    }
+
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.stdlib.jdk7)
     implementation(libs.kotlin.stdlib.jdk8)
@@ -64,6 +93,11 @@ dependencies {
     implementation(libs.hilt.compose)
 
     testImplementation(libs.junit)
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+
+    implementation(libs.core.ktx)
 
     implementation(libs.material.icons.extended)
     implementation(libs.coil.compose)
@@ -76,5 +110,11 @@ dependencies {
 
     implementation(libs.okhttp.core)
     implementation(libs.okhttp.logging)
+    implementation(libs.socketio.client) {
+        exclude(group = "org.json", module = "json")
+    }
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.maps.compose)
 
 }
