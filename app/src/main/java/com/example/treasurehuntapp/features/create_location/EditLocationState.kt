@@ -1,14 +1,17 @@
 package com.example.treasurehuntapp.features.create_location
 
-data class CreateLocationState(
-    val name: String = "New location",
-    val question: String = "What is hidden here?",
-    val correctAnswer: String = "Treasure",
+data class EditLocationState(
+    val locationId: String = "",
+    val name: String = "",
+    val question: String = "",
+    val correctAnswer: String = "",
     val hint: String = "",
     val imageUri: String = "",
+    val originalImageUrl: String? = null,
     val imageLabel: String = "Add location image (tap to select)",
-    val lat: String = "42.1234",
-    val lng: String = "23.4567",
+    val lat: String = "",
+    val lng: String = "",
+    val isLoading: Boolean = false,
     val saving: Boolean = false,
     val allowSaveWithoutImage: Boolean = false,
     val error: String? = null,
