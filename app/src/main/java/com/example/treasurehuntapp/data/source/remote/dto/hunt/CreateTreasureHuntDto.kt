@@ -4,6 +4,6 @@ data class CreateTreasureHuntDto(
     val name: String,
     val description: String? = null,
     val image: String? = null,
-    val start: String, // ISO date
-    val end: String    // ISO date
+    val start: String,
+    val end: String
 )
