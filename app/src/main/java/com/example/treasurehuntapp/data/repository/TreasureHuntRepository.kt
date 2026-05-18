@@ -13,6 +13,11 @@ class TreasureHuntRepository @Inject constructor(
     }
 
     suspend fun getAllHunts(): List<TreasureHuntDto> {
+        val memberships = api.getAll().data
+        return memberships.map { it.treasureHunt }
+    }
+
+    suspend fun getMemberships(): List<HuntMembershipDto> {
         return api.getAll().data
     }
 
@@ -50,5 +55,9 @@ class TreasureHuntRepository @Inject constructor(
             userId = userId,
             body = UpdateParticipantRoleDto(role = role)
         ).data
+    }
+
+    suspend fun removeParticipant(huntId: String, userId: String) {
+        api.removeParticipant(huntId = huntId, userId = userId)
     }
 }
