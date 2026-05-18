@@ -1,89 +1,281 @@
 package com.example.treasurehuntapp.features.login
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.rounded.AlternateEmail
+import androidx.compose.material.icons.rounded.ArrowForward
+import androidx.compose.material.icons.rounded.Lock
+import androidx.compose.material.icons.rounded.Visibility
+import androidx.compose.material.icons.rounded.VisibilityOff
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.treasurehuntapp.ui.appPageHeaderPadding
+import com.example.treasurehuntapp.ui.theme.AppColors
+import com.example.treasurehuntapp.ui.theme.AppGradients
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     onLoginSuccess: () -> Unit,
     onRegisterClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
     vm: LoginViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsState()
+    var passwordVisible by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("Login", style = MaterialTheme.typography.headlineMedium)
+    val pageBg = AppGradients.ScreenBackground
+    val topGlow = Brush.verticalGradient(
+        listOf(AppColors.PurplePrimary.copy(alpha = 0.35f), Color.Transparent)
+    )
 
-        Spacer(Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = state.email,
-            onValueChange = vm::onEmailChange,
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text("Email") },
-            singleLine = true
-        )
-
-        Spacer(Modifier.height(10.dp))
-
-        OutlinedTextField(
-            value = state.password,
-            onValueChange = vm::onPasswordChange,
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            singleLine = true
-        )
-
-        Spacer(Modifier.height(12.dp))
-
-        if (state.error != null) {
-            Text(
-                text = state.error!!,
-                color = MaterialTheme.colorScheme.error
-            )
-            Spacer(Modifier.height(10.dp))
-        }
-
-        Button(
-            onClick = { vm.login(onSuccess = onLoginSuccess) },
-            enabled = !state.isLoading,
-            modifier = Modifier.fillMaxWidth()
+    Scaffold(containerColor = Color.Transparent) { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(pageBg)
+                .padding(padding)
         ) {
-            if (state.isLoading) {
-                CircularProgressIndicator(
-                    strokeWidth = 2.dp,
-                    modifier = Modifier.size(18.dp)
-                )
-                Spacer(Modifier.width(8.dp))
-                Text("Signing in...")
-            } else {
-                Text("Login")
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(260.dp)
+                    .background(topGlow)
+            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .appPageHeaderPadding()
+                    .padding(horizontal = 8.dp, vertical = 16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Spacer(Modifier.height(8.dp))
+
+                Column {
+                    Spacer(Modifier.height(180.dp))
+                    Text(
+                        text = "Treasure hunts",
+                        color = AppColors.PurplePrimary,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                    Spacer(Modifier.height(10.dp))
+                    Text(
+                        text = "Welcome back, adventurer. Please\nsign in to continue.",
+                        color = AppColors.TextMuted,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+
+                    Spacer(Modifier.height(26.dp))
+
+                    StyledLoginField(
+                        value = state.email,
+                        onValueChange = vm::onEmailChange,
+                        placeholder = "Email address",
+                        leadingIcon = {
+                            Icon(
+                                Icons.Rounded.AlternateEmail,
+                                contentDescription = null,
+                                tint = AppColors.TextMuted
+                            )
+                        },
+                        singleLine = true
+                    )
+
+                    Spacer(Modifier.height(14.dp))
+
+                    StyledLoginField(
+                        value = state.password,
+                        onValueChange = vm::onPasswordChange,
+                        placeholder = "Password",
+                        leadingIcon = {
+                            Icon(
+                                Icons.Rounded.Lock,
+                                contentDescription = null,
+                                tint = AppColors.TextMuted
+                            )
+                        },
+                        trailingIcon = {
+                            IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                                Icon(
+                                    imageVector = if (passwordVisible) {
+                                        Icons.Rounded.VisibilityOff
+                                    } else {
+                                        Icons.Rounded.Visibility
+                                    },
+                                    contentDescription = "Toggle password visibility",
+                                    tint = AppColors.TextMuted
+                                )
+                            }
+                        },
+                        visualTransformation = if (passwordVisible) {
+                            VisualTransformation.None
+                        } else {
+                            PasswordVisualTransformation()
+                        },
+                        singleLine = true
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        TextButton(onClick = onForgotPasswordClick) {
+                            Text(
+                                "Forgot Password?",
+                                color = AppColors.PurplePrimary,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                    }
+
+                    if (!state.error.isNullOrBlank()) {
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            text = state.error!!,
+                            color = AppColors.Error,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+
+                    Spacer(Modifier.height(14.dp))
+
+                    Button(
+                        onClick = { vm.login(onSuccess = onLoginSuccess) },
+                        enabled = !state.isLoading,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(56.dp),
+                        shape = RoundedCornerShape(18.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = AppColors.PurplePrimary,
+                            contentColor = Color.White,
+                            disabledContainerColor = AppColors.PurpleDeep,
+                            disabledContentColor = Color.White.copy(alpha = 0.9f)
+                        )
+                    ) {
+                        if (state.isLoading) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(18.dp),
+                                strokeWidth = 2.dp,
+                                color = Color.White
+                            )
+                            Spacer(Modifier.width(10.dp))
+                            Text("Signing in...", fontWeight = FontWeight.Bold)
+                        } else {
+                            Text("Login", fontWeight = FontWeight.Bold)
+                            Spacer(Modifier.width(8.dp))
+                            Icon(
+                                Icons.Rounded.ArrowForward,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    }
+                }
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "New here? ",
+                            color = AppColors.TextMuted
+                        )
+                        TextButton(onClick = onRegisterClick) {
+                            Text(
+                                "Create an account",
+                                color = AppColors.PurplePrimary,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(8.dp))
+                    Surface(
+                        color = AppColors.Border,
+                        shape = RoundedCornerShape(100.dp),
+                        modifier = Modifier
+                            .width(116.dp)
+                            .height(4.dp)
+                    ) {}
+                }
             }
         }
-
-        Spacer(Modifier.height(12.dp))
-
-        TextButton(
-            onClick = {onRegisterClick()},
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("No account? Register")
-        }
     }
+}
+
+@Composable
+private fun StyledLoginField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    singleLine: Boolean = false
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = {
+            Text(
+                text = placeholder,
+                color = Color(0xFF8D86A8)
+            )
+        },
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        visualTransformation = visualTransformation,
+        singleLine = singleLine,
+        shape = RoundedCornerShape(16.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = Color(0xFF1A1431),
+            unfocusedContainerColor = Color(0xFF1A1431),
+            disabledContainerColor = Color(0xFF1A1431),
+            focusedBorderColor = Color(0xFF8E63FF),
+            unfocusedBorderColor = Color.Transparent,
+            focusedTextColor = Color.White,
+            unfocusedTextColor = Color.White,
+            cursorColor = Color(0xFF8E63FF)
+        )
+    )
 }

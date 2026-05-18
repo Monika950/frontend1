@@ -19,7 +19,18 @@ data class ProfileState(
     val lastName: String = "",
 
     val currentlyEditing: ProfileField? = null,
+    val huntsCompletedCount: Int = 0,
+    val huntsCreatedCount: Int = 0,
     val deleting: Boolean = false,
     val deleteError: String? = null,
     val deleted: Boolean = false,
+    val loggingOut: Boolean = false,
+    val logoutError: String? = null,
+    val loggedOut: Boolean = false,
+    val changingPassword: Boolean = false,
+    val changePasswordCurrent: String = "",
+    val changePasswordNew: String = "",
+    val changePasswordConfirm: String = "",
+    val changePasswordError: String? = null,
+    val changePasswordSuccess: String? = null,
 )
