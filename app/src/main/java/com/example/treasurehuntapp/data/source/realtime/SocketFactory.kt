@@ -1,7 +1,7 @@
 package com.example.treasurehuntapp.data.source.realtime
 
 import com.example.treasurehuntapp.BuildConfig
-import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.source.remote.auth.EncryptedTokenStorage
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.engineio.client.transports.WebSocket
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SocketFactory @Inject constructor(
-    private val tokenStorage: TokenStorage
+    private val tokenStorage: EncryptedTokenStorage
 ) {
 
     fun create(namespace: String): Socket? {

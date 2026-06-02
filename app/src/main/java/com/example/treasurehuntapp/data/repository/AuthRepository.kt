@@ -2,7 +2,7 @@ package com.example.treasurehuntapp.data.repository
 
 import android.util.Log
 import com.example.treasurehuntapp.data.source.remote.api.AuthApi
-import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.source.remote.auth.EncryptedTokenStorage
 import com.example.treasurehuntapp.data.source.remote.dto.auth.LoginDto
 import com.example.treasurehuntapp.data.source.remote.dto.auth.RefreshTokenDto
 import com.example.treasurehuntapp.data.source.remote.dto.auth.RegisterDto
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 class AuthRepository @Inject constructor(
     private val api: AuthApi,
     @Named("authApiNoAuth") private val noAuthApi: AuthApi,
-    private val tokenStorage: TokenStorage
+    private val tokenStorage: EncryptedTokenStorage
 ) {
     companion object {
         private const val TAG = "AuthRepository"

@@ -3,7 +3,7 @@ package com.example.treasurehuntapp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.treasurehuntapp.data.repository.AuthRepository
-import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.source.remote.auth.EncryptedTokenStorage
 import com.example.treasurehuntapp.navigation.Destinations
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val tokenStorage: TokenStorage,
+    private val tokenStorage: EncryptedTokenStorage,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MainState())

@@ -1,7 +1,7 @@
 package com.example.treasurehuntapp.data.source.remote.auth
 
 import com.example.treasurehuntapp.data.source.remote.api.AuthApi
-import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.source.remote.auth.EncryptedTokenStorage
 import com.example.treasurehuntapp.data.source.remote.dto.auth.RefreshTokenDto
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class TokenAuthenticator @Inject constructor(
-    private val tokenStorage: TokenStorage,
+    private val tokenStorage: EncryptedTokenStorage,
     @Named("authApiNoAuth") private val noAuthApi: AuthApi
 ) : Authenticator {
 

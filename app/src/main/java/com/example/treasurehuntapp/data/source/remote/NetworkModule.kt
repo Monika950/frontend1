@@ -26,7 +26,7 @@ import com.example.treasurehuntapp.data.source.remote.api.UserProgressApi
 import com.example.treasurehuntapp.data.source.remote.api.UploadsApi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
-import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.source.remote.auth.EncryptedTokenStorage
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -73,10 +73,10 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTokenStorage(
+    fun provideEncryptedTokenStorage(
         @ApplicationContext context: Context,
         @ApplicationScope appScope: CoroutineScope
-    ): TokenStorage = TokenStorage(context, appScope)
+    ): EncryptedTokenStorage = EncryptedTokenStorage(context, appScope)
 
     @Provides
     @Singleton
