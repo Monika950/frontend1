@@ -19,6 +19,7 @@ datastore-core = "1.2.0"
 datastore-preferences-core = "1.2.0"
 foundation = "1.10.1"
 socketio = "2.1.1"
+security-crypto = "1.1.0-alpha06"
 
 
 
@@ -64,6 +65,7 @@ maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = 
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "play-services-maps" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "play-services-location" }
 socketio-client = { module = "io.socket:socket.io-client", version.ref = "socketio" }
+security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security-crypto" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

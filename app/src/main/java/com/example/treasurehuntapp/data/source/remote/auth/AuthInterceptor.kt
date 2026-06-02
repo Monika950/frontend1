@@ -1,6 +1,6 @@
 package com.example.treasurehuntapp.data.source.remote.auth
 
-import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.source.remote.auth.EncryptedTokenStorage
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthInterceptor @Inject constructor(
-    private val tokenStorage: TokenStorage
+    private val tokenStorage: EncryptedTokenStorage
 ) : Interceptor {
     private fun isAuthEndpoint(path: String): Boolean {
         return path.startsWith("/auth/login") ||

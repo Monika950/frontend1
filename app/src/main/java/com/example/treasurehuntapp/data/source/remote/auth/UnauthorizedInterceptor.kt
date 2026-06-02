@@ -1,6 +1,6 @@
 package com.example.treasurehuntapp.data.source.remote.auth
 
-import com.example.treasurehuntapp.data.source.remote.auth.TokenStorage
+import com.example.treasurehuntapp.data.source.remote.auth.EncryptedTokenStorage
 import com.example.treasurehuntapp.di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 class UnauthorizedInterceptor @Inject constructor(
-    private val tokenStorage: TokenStorage,
+    private val tokenStorage: EncryptedTokenStorage,
     @ApplicationScope private val appScope: CoroutineScope
 ) : Interceptor {
 
