@@ -69,11 +69,31 @@ Runtime request:
 
 - Fine location permission is requested when opening Active Hunt.
 
+## Setup
+
+### 1. Google Maps API Key
+
+The app requires a Google Maps API key to display maps.
+
+1. Get an API key from [Google Cloud Console](https://console.cloud.google.com/google/maps-apis)
+2. Copy `local.properties.example` to `local.properties`
+3. Add your API key to `local.properties`:
+   ```
+   MAPS_API_KEY=your_actual_api_key_here
+   ```
+4. **Important**: Restrict your API key in Google Cloud Console:
+   - Add application restrictions (Android apps)
+   - Add your app's package name: `com.example.treasurehuntapp`
+   - Add your SHA-1 certificate fingerprint
+
+**Note**: `local.properties` is git-ignored and should never be committed to version control.
+
 ## Build and run
 
-1. Open in Android Studio.
-2. Sync Gradle.
-3. Run app on emulator/device (API 24+).
+1. Complete the setup steps above (configure Google Maps API key).
+2. Open in Android Studio.
+3. Sync Gradle.
+4. Run app on emulator/device (API 24+).
 
 ## Backend base URL
 
