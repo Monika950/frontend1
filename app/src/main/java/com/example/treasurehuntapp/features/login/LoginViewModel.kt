@@ -1,7 +1,9 @@
 package com.example.treasurehuntapp.features.login
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.treasurehuntapp.R
 import com.example.treasurehuntapp.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val app: Application
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(LoginState())
@@ -26,7 +29,7 @@ class LoginViewModel @Inject constructor(
         val password = state.value.password
 
         if (email.isBlank() || password.isBlank()) {
-            _state.update { it.copy(error = "Email and password are required.") }
+            _state.update { it.copy(error = app.getString(R.string.error_email_password_required)) }
             return
         }
 
@@ -40,7 +43,7 @@ class LoginViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         isLoading = false,
-                        error = e.message ?: "Login failed."
+                        error = e.message ?: app.getString(R.string.error_login_failed)
                     )
                 }
             }

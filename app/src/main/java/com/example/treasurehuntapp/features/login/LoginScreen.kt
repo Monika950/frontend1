@@ -46,6 +46,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.res.stringResource
+import com.example.treasurehuntapp.R
 import com.example.treasurehuntapp.ui.appPageHeaderPadding
 import com.example.treasurehuntapp.ui.theme.AppColors
 import com.example.treasurehuntapp.ui.theme.AppGradients
@@ -91,14 +93,14 @@ fun LoginScreen(
                 Column {
                     Spacer(Modifier.height(180.dp))
                     Text(
-                        text = "Treasure hunts",
+                        text = stringResource(R.string.login_title),
                         color = AppColors.PurplePrimary,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.ExtraBold
                     )
                     Spacer(Modifier.height(10.dp))
                     Text(
-                        text = "Welcome back, adventurer. Please\nsign in to continue.",
+                        text = stringResource(R.string.login_welcome),
                         color = AppColors.TextMuted,
                         style = MaterialTheme.typography.bodyLarge
                     )
@@ -108,7 +110,7 @@ fun LoginScreen(
                     StyledLoginField(
                         value = state.email,
                         onValueChange = vm::onEmailChange,
-                        placeholder = "Email address",
+                        placeholder = stringResource(R.string.login_email_placeholder),
                         leadingIcon = {
                             Icon(
                                 Icons.Rounded.AlternateEmail,
@@ -124,7 +126,7 @@ fun LoginScreen(
                     StyledLoginField(
                         value = state.password,
                         onValueChange = vm::onPasswordChange,
-                        placeholder = "Password",
+                        placeholder = stringResource(R.string.login_password_placeholder),
                         leadingIcon = {
                             Icon(
                                 Icons.Rounded.Lock,
@@ -140,7 +142,7 @@ fun LoginScreen(
                                     } else {
                                         Icons.Rounded.Visibility
                                     },
-                                    contentDescription = "Toggle password visibility",
+                                    contentDescription = stringResource(R.string.cd_toggle_password),
                                     tint = AppColors.TextMuted
                                 )
                             }
@@ -159,7 +161,7 @@ fun LoginScreen(
                     ) {
                         TextButton(onClick = onForgotPasswordClick) {
                             Text(
-                                "Forgot Password?",
+                                stringResource(R.string.login_forgot_password),
                                 color = AppColors.PurplePrimary,
                                 fontWeight = FontWeight.SemiBold
                             )
@@ -198,9 +200,9 @@ fun LoginScreen(
                                 color = Color.White
                             )
                             Spacer(Modifier.width(10.dp))
-                            Text("Signing in...", fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.login_button_loading), fontWeight = FontWeight.Bold)
                         } else {
-                            Text("Login", fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.login_button), fontWeight = FontWeight.Bold)
                             Spacer(Modifier.width(8.dp))
                             Icon(
                                 Icons.Rounded.ArrowForward,
@@ -217,12 +219,12 @@ fun LoginScreen(
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "New here? ",
+                            text = stringResource(R.string.login_new_user),
                             color = AppColors.TextMuted
                         )
                         TextButton(onClick = onRegisterClick) {
                             Text(
-                                "Create an account",
+                                stringResource(R.string.login_create_account),
                                 color = AppColors.PurplePrimary,
                                 fontWeight = FontWeight.Bold
                             )
