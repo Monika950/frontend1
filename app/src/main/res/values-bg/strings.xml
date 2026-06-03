@@ -1,0 +1,385 @@
+<resources>
+    <!-- ============================================ -->
+    <!-- APP NAME -->
+    <!-- ============================================ -->
+    <string name="app_name">Ловци на съкровища</string>
+
+    <!-- ============================================ -->
+    <!-- COMMON UI -->
+    <!-- ============================================ -->
+    <string name="common_back">Назад</string>
+    <string name="common_cancel">Отказ</string>
+    <string name="common_ok">OK</string>
+    <string name="common_save">Запази</string>
+    <string name="common_delete">Изтрий</string>
+    <string name="common_retry">Опитай отново</string>
+    <string name="common_loading">Зареждане…</string>
+    <string name="common_error">Грешка</string>
+    
+    <!-- Content Descriptions -->
+    <string name="cd_back">Назад</string>
+    <string name="cd_toggle_password">Покажи/скрий парола</string>
+    <string name="cd_notifications">Известия</string>
+    <string name="cd_create_hunt">Създай лов</string>
+    <string name="cd_add">Добави</string>
+
+    <!-- ============================================ -->
+    <!-- AUTHENTICATION -->
+    <!-- ============================================ -->
+    
+    <!-- Login Screen -->
+    <string name="login_title">Ловци на съкровища</string>
+    <string name="login_welcome">Добре дошъл обратно, приключенецо.\nМоля, влез за да продължиш.</string>
+    <string name="login_email_placeholder">Имейл адрес</string>
+    <string name="login_password_placeholder">Парола</string>
+    <string name="login_button">Вход</string>
+    <string name="login_button_loading">Влизане…</string>
+    <string name="login_forgot_password">Забравена парола?</string>
+    <string name="login_new_user">Нов тук? </string>
+    <string name="login_create_account">Създай профил</string>
+    
+    <!-- Login Errors -->
+    <string name="error_email_password_required">Имейл и парола са задължителни.</string>
+    <string name="error_login_failed">Входът е неуспешен.</string>
+
+    <!-- Register Screen -->
+    <string name="register_title">Създай профил</string>
+    <string name="register_subtitle">Присъедини се към лова и открий скрити\nсъкровища около теб.</string>
+    <string name="register_first_name_label">Име</string>
+    <string name="register_first_name_placeholder">Иван</string>
+    <string name="register_last_name_label">Фамилия</string>
+    <string name="register_last_name_placeholder">Иванов</string>
+    <string name="register_username_label">Потребителско име</string>
+    <string name="register_username_placeholder">ловец_на_съкровища_99</string>
+    <string name="register_email_label">Имейл адрес</string>
+    <string name="register_email_placeholder">lovets@example.com</string>
+    <string name="register_password_label">Парола</string>
+    <string name="register_password_placeholder">••••••••</string>
+    <string name="register_terms_prefix">Като се регистрирам, приемам </string>
+    <string name="register_terms_link">Условията за ползване</string>
+    <string name="register_terms_and"> и </string>
+    <string name="register_privacy_link">Политиката за поверителност.</string>
+    <string name="register_button">Регистрация</string>
+    <string name="register_button_loading">Създаване…</string>
+    <string name="register_already_user">Вече си ловец? </string>
+    <string name="register_sign_in">Влез</string>
+    
+    <!-- Register Errors -->
+    <string name="error_fill_all_fields">Моля, попълни всички полета.</string>
+    <string name="error_registration_failed">Регистрацията е неуспешна</string>
+
+    <!-- Forgot Password Screen -->
+    <string name="forgot_password_title">Забравена парола?</string>
+    <string name="forgot_password_subtitle">Не се притеснявай! Въведи имейла си и ще ти изпратим инструкции за възстановяване.</string>
+    <string name="forgot_password_email_label">ИМЕЙЛ АДРЕС</string>
+    <string name="forgot_password_button">Възстанови парола</string>
+    <string name="forgot_password_button_loading">Изпращане…</string>
+    <string name="forgot_password_back_to_login">Обратно към вход</string>
+    <string name="forgot_password_success">Ако съществува профил с този имейл, инструкции за възстановяване са изпратени.</string>
+    
+    <!-- Forgot Password Errors -->
+    <string name="error_email_required">Имейлът е задължителен.</string>
+    <string name="error_password_reset_failed">Неуспешна заявка за възстановяване на парола.</string>
+
+    <!-- Reset Password Screen -->
+    <string name="reset_password_title">Възстанови парола</string>
+    <string name="reset_password_subtitle">Създай нова парола за профила си.</string>
+    <string name="reset_password_new_label">НОВА ПАРОЛА</string>
+    <string name="reset_password_new_placeholder">Въведи нова парола</string>
+    <string name="reset_password_confirm_label">ПОТВЪРДИ ПАРОЛА</string>
+    <string name="reset_password_confirm_placeholder">Потвърди новата парола</string>
+    <string name="reset_password_button">Възстанови парола</string>
+    <string name="reset_password_button_loading">Възстановяване…</string>
+    <string name="reset_password_back_to_login">Обратно към вход</string>
+    <string name="reset_password_success">Паролата е успешно възстановена.</string>
+    <string name="reset_password_invalid_link">Невалидна връзка за възстановяване.</string>
+    
+    <!-- Reset Password Errors -->
+    <string name="error_fill_both_passwords">Моля, попълни и двете полета за парола.</string>
+    <string name="error_passwords_not_match">Паролите не съвпадат.</string>
+    <string name="error_invalid_password">Невалидна парола. Моля, провери изискванията.</string>
+    <string name="error_reset_link_expired">Тази връзка е невалидна или изтекла.</string>
+    <string name="error_reset_failed">Възстановяването е неуспешно.</string>
+    <string name="error_failed_to_reset">Неуспешно възстановяване на парола.</string>
+
+    <!-- ============================================ -->
+    <!-- HOME SCREEN -->
+    <!-- ============================================ -->
+    <string name="home_greeting_title">Здравей, изследователю!</string>
+    <string name="home_greeting_subtitle">Готов ли си за следващия лов?</string>
+    <string name="home_section_active_hunts">Активни ловове</string>
+    <string name="home_join_card_title">Присъедини се към лов</string>
+    <string name="home_join_code_label">Въведи код за достъп</string>
+    <string name="home_join_button">ПРИСЪЕДИНИ СЕ</string>
+    <string name="home_join_button_loading">Присъединяване…</string>
+    <string name="home_resume_button">Продължи</string>
+    <string name="home_loading_hunts">Зареждане на ловове…</string>
+    <string name="home_no_active_hunts">Все още няма активни ловове.</string>
+    <string name="home_no_active_hunts_subtitle">Присъедини се или създай лов, за да започнеш.</string>
+    <string name="home_hunt_started">Започнат: %s</string>
+    <string name="home_hunt_image_desc">Корица на %s</string>
+    
+    <!-- Home Errors -->
+    <string name="error_failed_to_load_hunts">Неуспешно зареждане на ловове</string>
+    <string name="error_join_failed">Присъединяването е неуспешно</string>
+
+    <!-- ============================================ -->
+    <!-- PROFILE -->
+    <!-- ============================================ -->
+    
+    <!-- Profile Screen -->
+    <string name="profile_section_statistics">СТАТИСТИКА</string>
+    <string name="profile_stat_hunts_completed">Завършени ловове</string>
+    <string name="profile_stat_hunts_created">Създадени ловове</string>
+    <string name="profile_section_personal_info">ЛИЧНА ИНФОРМАЦИЯ</string>
+    <string name="profile_email_label">Имейл</string>
+    <string name="profile_joined_label">Присъединен</string>
+    <string name="profile_edit_button">Редактирай профил</string>
+    <string name="profile_logout_button">Изход</string>
+    <string name="profile_delete_account_button">Изтрий профил</string>
+    <string name="profile_delete_dialog_title">Изтриване на профил?</string>
+    <string name="profile_delete_dialog_message">Това действие не може да бъде отменено.</string>
+    
+    <!-- Profile Errors -->
+    <string name="error_failed_to_load_profile">Неуспешно зареждане на профил</string>
+    <string name="error_failed_to_save_profile">Неуспешно запазване на профил</string>
+    <string name="error_failed_to_delete_account">Неуспешно изтриване на профил</string>
+    <string name="error_logout_failed">Изходът е неуспешен</string>
+
+    <!-- Edit Profile Screen -->
+    <string name="edit_profile_title">Редактирай профил</string>
+    <string name="edit_profile_subtitle">Актуализирай информацията за профила си</string>
+    <string name="edit_profile_description">Тези промени ще бъдат видими в лововете и класациите.</string>
+    <string name="edit_profile_username_label">Потребителско име</string>
+    <string name="edit_profile_email_label">Имейл</string>
+    <string name="edit_profile_first_name_label">Име</string>
+    <string name="edit_profile_last_name_label">Фамилия</string>
+    <string name="edit_profile_change_password_title">Смени парола</string>
+    <string name="edit_profile_current_password_label">Текуща парола</string>
+    <string name="edit_profile_new_password_label">Нова парола</string>
+    <string name="edit_profile_confirm_password_label">Потвърди нова парола</string>
+    <string name="edit_profile_change_password_button">Смени парола</string>
+    <string name="edit_profile_change_password_button_loading">Сменяне…</string>
+    <string name="edit_profile_save_button">Запази промени</string>
+    <string name="edit_profile_save_button_loading">Запазване…</string>
+    <string name="edit_profile_back_button">Назад</string>
+    <string name="edit_profile_password_success">Паролата е успешно сменена</string>
+    
+    <!-- Edit Profile Errors -->
+    <string name="error_all_password_fields_required">Всички полета за парола са задължителни</string>
+    <string name="error_failed_to_change_password">Неуспешна смяна на парола</string>
+
+    <!-- ============================================ -->
+    <!-- NOTIFICATIONS -->
+    <!-- ============================================ -->
+    <string name="notifications_title">Известия</string>
+    <string name="notifications_mark_all_read">Маркирай всички като прочетени</string>
+    <string name="notifications_empty">Все още няма известия.</string>
+    <string name="notifications_default_title">Известие</string>
+    <string name="notifications_time_just_now">Току-що</string>
+    <string name="notifications_time_minutes_ago">Преди %d мин</string>
+    <string name="notifications_time_hours_ago">Преди %d часа</string>
+    <string name="notifications_time_yesterday">Вчера</string>
+    <string name="notifications_time_days_ago">Преди %d дни</string>
+    
+    <!-- Notifications Errors -->
+    <string name="error_failed_to_load_notifications">Неуспешно зареждане на известия</string>
+
+    <!-- ============================================ -->
+    <!-- MY HUNTS -->
+    <!-- ============================================ -->
+    <string name="my_hunts_title">Моите ловове</string>
+    <string name="my_hunts_tab_created">Създадени</string>
+    <string name="my_hunts_tab_joined">Присъединени</string>
+    <string name="my_hunts_empty">Все още няма ловове.</string>
+    <string name="my_hunts_empty_subtitle">Създай или се присъедини към лов, за да го видиш тук.</string>
+    <string name="my_hunts_status_active">АКТИВЕН</string>
+    <string name="my_hunts_status_scheduled">ПЛАНИРАН</string>
+    <string name="my_hunts_status_finished">ЗАВЪРШЕН</string>
+    <string name="my_hunts_cta_manage">Управлявай лов</string>
+    <string name="my_hunts_cta_continue">Продължи</string>
+    
+    <!-- My Hunts Errors -->
+    <string name="error_failed_to_load_my_hunts">Неуспешно зареждане на ловове</string>
+
+    <!-- ============================================ -->
+    <!-- CREATE HUNT -->
+    <!-- ============================================ -->
+    <string name="create_hunt_title">Нов лов</string>
+    <string name="create_hunt_section_details">Детайли за лова</string>
+    <string name="create_hunt_name_placeholder">Име на лова (напр. Лилави градски тайни)</string>
+    <string name="create_hunt_description_placeholder">Разкажи на участниците какво да очакват…</string>
+    <string name="create_hunt_section_schedule">График</string>
+    <string name="create_hunt_starts_label">Започва</string>
+    <string name="create_hunt_ends_label">Завършва</string>
+    <string name="create_hunt_pick_date">Избери дата</string>
+    <string name="create_hunt_upload_cover">Качи корица</string>
+    <string name="create_hunt_change_cover">Смени корица</string>
+    <string name="create_hunt_image_hint">PNG или JPG, макс. 5MB</string>
+    <string name="create_hunt_image_hint_change">Докосни, за да избереш друго изображение</string>
+    <string name="create_hunt_save_button">Запази лов</string>
+    <string name="create_hunt_save_button_loading">Запазване…</string>
+    <string name="create_hunt_cd_cover_image">Избрано изображение за корица</string>
+    
+    <!-- Create Hunt Errors -->
+    <string name="error_hunt_required_fields">Име, начало и край са задължителни</string>
+    <string name="error_end_after_start">Крайното време трябва да е след началното</string>
+    <string name="error_create_hunt_failed">Създаването на лов е неуспешно</string>
+
+    <!-- ============================================ -->
+    <!-- EDIT HUNT -->
+    <!-- ============================================ -->
+    <string name="edit_hunt_title">Редактирай лов</string>
+    <string name="edit_hunt_section_details">Детайли за лова</string>
+    <string name="edit_hunt_name_placeholder">Име на лова</string>
+    <string name="edit_hunt_description_placeholder">Разкажи на участниците какво да очакват…</string>
+    <string name="edit_hunt_section_schedule">График</string>
+    <string name="edit_hunt_starts_label">Започва</string>
+    <string name="edit_hunt_ends_label">Завършва</string>
+    <string name="edit_hunt_add_owner_button">Добави собственик</string>
+    <string name="edit_hunt_delete_button">Изтрий лов</string>
+    <string name="edit_hunt_save_button">Запази промени</string>
+    <string name="edit_hunt_save_button_loading">Запазване…</string>
+    <string name="edit_hunt_upload_cover">Качи корица</string>
+    <string name="edit_hunt_change_cover">Смени корица</string>
+    <string name="edit_hunt_cd_cover_image">Корица на лова</string>
+    <string name="edit_hunt_success">Ловът е актуализиран</string>
+    
+    <!-- Add Owner Dialog -->
+    <string name="edit_hunt_add_owner_dialog_title">Добави собственик</string>
+    <string name="edit_hunt_add_owner_dialog_message">Въведи потребителския ID на участника, когото искаш да повишиш.</string>
+    <string name="edit_hunt_add_owner_dialog_label">Потребителски ID</string>
+    <string name="edit_hunt_add_owner_dialog_button">Добави собственик</string>
+    <string name="edit_hunt_add_owner_success">Собственикът е добавен</string>
+    
+    <!-- Delete Hunt Dialog -->
+    <string name="edit_hunt_delete_dialog_title">Изтриване на лов?</string>
+    <string name="edit_hunt_delete_dialog_message">Това ще изтрие завинаги лова и неговите данни.</string>
+    
+    <!-- Edit Hunt Errors -->
+    <string name="error_no_selected_hunt">Няма избран лов</string>
+    <string name="error_user_id_required">Потребителският ID е задължителен</string>
+    <string name="error_update_hunt_failed">Актуализацията на лова е неуспешна</string>
+    <string name="error_add_owner_failed">Добавянето на собственик е неуспешно</string>
+    <string name="error_delete_hunt_failed">Изтриването на лова е неуспешно</string>
+
+    <!-- ============================================ -->
+    <!-- CREATE LOCATION -->
+    <!-- ============================================ -->
+    <string name="create_location_title">Създай локация</string>
+    <string name="create_location_name_label">Име</string>
+    <string name="create_location_name_default">Нова локация</string>
+    <string name="create_location_image_label">Изображение на локацията</string>
+    <string name="create_location_image_desc">Изображение на локацията</string>
+    <string name="create_location_question_label">Въпрос</string>
+    <string name="create_location_question_default">Какво е скрито тук?</string>
+    <string name="create_location_answer_label">Верен отговор</string>
+    <string name="create_location_answer_default">Съкровище</string>
+    <string name="create_location_map_label">Избери на карта</string>
+    <string name="create_location_map_instruction">Докосни картата, за да зададеш координати</string>
+    <string name="create_location_marker_title">Избрана локация</string>
+    <string name="create_location_lat_label">Шир.</string>
+    <string name="create_location_lng_label">Дълж.</string>
+    <string name="create_location_save_button">Запази</string>
+    <string name="create_location_save_button_loading">Запазване…</string>
+    <string name="create_location_save_without_image">Запази без изображение</string>
+    <string name="create_location_cancel_button">Отказ</string>
+    <string name="create_location_image_selected">Изображение избрано</string>
+    
+    <!-- Create Location Errors -->
+    <string name="error_location_required_fields">Име, въпрос и верен отговор са задължителни.</string>
+    <string name="error_no_active_hunt">Няма активен лов. Присъедини се или създай лов първо.</string>
+    <string name="error_invalid_coordinates">Ширината и дължината трябва да са валидни числа.</string>
+    <string name="error_create_location_failed">Неуспешно създаване на локация.</string>
+
+    <!-- ============================================ -->
+    <!-- EDIT LOCATION -->
+    <!-- ============================================ -->
+    <string name="edit_location_title">Редактирай локация</string>
+    <string name="edit_location_missing_id">Липсващ ID на локация</string>
+    
+    <!-- Edit Location Errors -->
+    <string name="error_failed_to_load_location">Неуспешно зареждане на локация</string>
+    <string name="error_failed_to_update_location">Неуспешна актуализация на локация</string>
+
+    <!-- ============================================ -->
+    <!-- ACTIVE HUNT - PARTICIPANT -->
+    <!-- ============================================ -->
+    <string name="active_hunt_live_badge">АКТИВЕН ЛОВ</string>
+    <string name="active_hunt_target_reached">ЦЕЛ ДОСТИГНАТА</string>
+    <string name="active_hunt_status_arrived">ПРИСТИГНАЛ</string>
+    <string name="active_hunt_status_en_route">В ПЪТ</string>
+    <string name="active_hunt_next_location">Следваща локация</string>
+    <string name="active_hunt_answer_task_button">ОТГОВОРИ НА ЗАДАЧА</string>
+    <string name="active_hunt_abandon_button">Напусни лов</string>
+    <string name="active_hunt_abandon_dialog_title">Напускане на лов?</string>
+    <string name="active_hunt_abandon_dialog_message">Текущият ти прогрес за този лов ще бъде изгубен.</string>
+    <string name="active_hunt_abandon_dialog_button">Напусни</string>
+    <string name="active_hunt_marker_you">Ти</string>
+    
+    <!-- Task Dialog -->
+    <string name="active_hunt_task_answer_placeholder">Напиши отговора си тук…</string>
+    <string name="active_hunt_task_hint_show">Вземи подсказка за помощ</string>
+    <string name="active_hunt_task_hint_hide">Скрий подсказка</string>
+    <string name="active_hunt_task_submit_button">Изпрати</string>
+    <string name="active_hunt_task_submit_button_loading">Изпращане…</string>
+    
+    <!-- Completion Screen -->
+    <string name="active_hunt_completion_message">Успешно завърши лова.</string>
+    <string name="active_hunt_completion_total_time">ОБЩО ВРЕМЕ</string>
+    <string name="active_hunt_completion_questions">ОТГОВОРЕНИ ВЪПРОСИ</string>
+    <string name="active_hunt_completion_time_placeholder">--:--</string>
+    <string name="active_hunt_completion_questions_format">%d/%d</string>
+    <string name="active_hunt_completion_return_button">Обратно към начало</string>
+
+    <!-- ============================================ -->
+    <!-- ACTIVE HUNT - OWNER -->
+    <!-- ============================================ -->
+    <string name="owner_active_hunt_title">Следи участниците</string>
+    <string name="owner_active_hunt_default_title">Активен лов</string>
+    <string name="owner_participants_title">Участници</string>
+    <string name="owner_live_progress_badge">ТЕКУЩ ПРОГРЕС</string>
+    <string name="owner_locations_title">Локации на лова</string>
+    <string name="owner_add_location_button">Добави локация</string>
+    <string name="owner_edit_hunt_button">Редактирай лов</string>
+    <string name="owner_no_participants">Все още няма участници.</string>
+    <string name="owner_no_participants_subtitle">Покани играчи, за да започнеш проследяването.</string>
+    <string name="owner_participant_active">Активен сега</string>
+    <string name="owner_participant_role_label">РОЛЯ</string>
+    <string name="owner_participant_remove_label">ПРЕМАХНИ</string>
+    <string name="owner_participant_track_label">СЛЕДИ</string>
+    <string name="owner_participant_marker_snippet">Позиция на участник</string>
+    
+    <!-- Delete Location Dialog -->
+    <string name="owner_delete_location_dialog_title">Изтриване на локация</string>
+    <string name="owner_delete_location_dialog_message">Изтрий \"%s\" от този лов?</string>
+    
+    <!-- Remove Participant Dialog -->
+    <string name="owner_remove_participant_dialog_title">Премахване на участник</string>
+    <string name="owner_remove_participant_dialog_message">Премахни \"%s\" от този лов?</string>
+    <string name="owner_remove_participant_button">Премахни</string>
+    
+    <!-- Change Role Dialog -->
+    <string name="owner_change_role_dialog_title">Смяна на роля</string>
+    <string name="owner_change_role_dialog_message">Смени ролята на \"%s\".</string>
+    <string name="owner_change_role_participant">Участник</string>
+    <string name="owner_change_role_owner">Собственик</string>
+    
+    <!-- Participant Tracking Dialog -->
+    <string name="owner_tracking_dialog_title">%s</string>
+    <string name="owner_tracking_dialog_default_name">Играч</string>
+
+    <!-- Hunt Info Card -->
+    <string name="hunt_info_start_label">Начало: </string>
+    <string name="hunt_info_end_label">Край: </string>
+    <string name="hunt_info_locations_label">Локации: </string>
+    <string name="hunt_info_members_label">Членове: </string>
+    <string name="hunt_info_code_label">Код: </string>
+    <string name="hunt_info_date_placeholder">-</string>
+
+    <!-- ============================================ -->
+    <!-- DATE/TIME FORMATTING -->
+    <!-- ============================================ -->
+    <string name="date_format_month_year">MMM yyyy</string>
+
+</resources>
